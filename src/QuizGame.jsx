@@ -100,22 +100,7 @@ const QuizGame = () => {
     const handleResetGame = () => {
         generateRandomNumbers();
     };
-    const handleTouchStart = (event, value, source, sourceIndex) => {
-        event.preventDefault();
-        const simulatedEvent = new MouseEvent('mousedown', {
-            clientX: event.touches[0].clientX,
-            clientY: event.touches[0].clientY,
-        });
-        handleDragStart(simulatedEvent, value, source, sourceIndex);
-    };
-
-    const handleTouchEnd = (event, index) => {
-        event.preventDefault();
-        handleDropOption(event, index);
-        handleDropBucket(event, index);
-    };
-
-
+    
 
     const isButtonDisabled = buckets.includes(null);
 
@@ -143,13 +128,7 @@ const QuizGame = () => {
                                     key={index}
                                     className="bg-purple-200 p-5 rounded cursor-move transform transition-all duration-300 hover:bg-purple-400 hover:shadow-lg text-black font-bold"
                                     draggable="true"
-                                    onTouchStart={(event) =>
-                                        handleTouchStart(event, option, 'options', index)
-                                    }
-                                    onTouchEnd={(event) => handleTouchEnd(event, index)}
-                                    onDragStart={(event) =>
-                                        handleDragStart(event, option, 'options', index)
-                                    }
+                                    onDragStart={(event) => handleDragStart(event, option, 'options', index)}
                                     onDragOver={handleDragOver}
                                     onDrop={(event) => handleDropOption(event, index)}
                                 >
@@ -169,13 +148,7 @@ const QuizGame = () => {
                                     className={`bg-blue-200 md:p-4 p-5  rounded cursor-move ${bucket === null ? 'border-2 border-dashed' : ' border-2 shadow-lg'
                                         } transform transition-all duration-300 hover:scale-105 text-black md:text-lg text-base border-black`}
                                     draggable="true"
-                                    onTouchStart={(event) =>
-                                        handleTouchStart(event, bucket, 'buckets', index)
-                                    }
-                                    onTouchEnd={(event) => handleTouchEnd(event, index)}
-                                    onDragStart={(event) =>
-                                        handleDragStart(event, bucket, 'buckets', index)
-                                    }
+                                    onDragStart={(event) => handleDragStart(event, bucket, 'buckets', index)}
                                     onDragOver={handleDragOver}
                                     onDrop={(event) => handleDropBucket(event, index)}
                                 >
